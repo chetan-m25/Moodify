@@ -15,6 +15,7 @@
   &__logo {
     font-size: 1.75rem;
     font-weight: 700;
+    text-decoration: none;
 
     /* match login theme */
     background: linear-gradient(135deg, crimson, #b11226);
@@ -29,13 +30,13 @@
   }
 
   &__user {
-    width: 2.4rem;
-    height: 2.4rem;
+    width: 2.75rem;
+    height: 2.75rem;
     border-radius: 50%;
     border: none;
 
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1rem;
     background: linear-gradient(135deg, crimson, #b11226);
     color: white;
     cursor: pointer;
@@ -69,6 +70,55 @@
       }
     }
   }
+  .navbar__right {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+
+  .navbar__upload {
+    background: none;
+    border: none;
+    color: crimson;
+    font-size: 2rem;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+
+    &:hover {
+      transform: scale(1.15);
+    }
+  }
+}
+
+.tooltip {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-text {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  background: #121212;
+  color: #fff;
+  font-size: 12px;
+
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+
+  transition: opacity 0.2s ease;
+}
+
+.tooltip:hover .tooltip-text {
+  opacity: 1;
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,175 @@
+.upload-page {
+  min-height: calc(100vh - 60px);
+  padding: 80px 16px 24px;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.upload-drop {
+  width: 100%;
+  max-width: 420px;
+  height: 170px;
+
+  border: 2px dashed crimson;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: #aaa;
+  position: relative;
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.25s ease;
+
+  p {
+    max-width: 90%;
+    text-align: center;
+    word-break: break-all;
+    overflow-wrap: anywhere;
+  }
+}
+
+.upload-drop:hover {
+  border-color: #ff4d6d;
+  background: rgba(220, 20, 60, 0.05);
+}
+
+.upload-drop.dragging {
+  border-color: #ff4d6d;
+  background: rgba(220, 20, 60, 0.1);
+  transform: scale(1.02);
+}
+
+.upload-drop input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.meta-preview {
+  width: 100%;
+  max-width: 420px;
+  background: #111;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.music-preview {
+  width: 100%;
+  max-width: 420px;
+
+  background: #121212;
+  border-radius: 14px;
+  padding: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.music-preview img {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.music-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.music-info .title {
+  font-weight: 600;
+}
+
+.music-info .artist {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+select {
+  width: 100%;
+  max-width: 420px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #121212;
+  color: white;
+  border: 1px solid #333;
+}
+
+.upload-btn {
+  width: 100%;
+  max-width: 420px;
+  padding: 12px;
+
+  background: linear-gradient(135deg, crimson, #b11226);
+  border: none;
+  border-radius: 10px;
+
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.upload-btn:disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
+}
+
+.upload-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(220, 20, 60, 0.3);
+}
+
+.upload-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .upload-page {
+    padding: 24px 12px;
+  }
+
+  .upload-drop {
+    height: 150px;
+  }
+
+  .music-preview {
+    padding: 12px;
+  }
+
+  .music-preview img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .upload-btn {
+    padding: 11px;
+  }
+}
