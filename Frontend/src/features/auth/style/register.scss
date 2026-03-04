@@ -40,6 +40,12 @@
       flex-direction: column;
       gap: 0.4rem;
 
+      .form-error {
+        color: #ff4d6d;
+        font-size: 0.8rem;
+        text-align: center;
+      }
+
       label {
         font-size: 0.85rem;
         color: #bbb;
@@ -61,6 +67,25 @@
           box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
           outline: none;
         }
+      }
+
+      .input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        input {
+          width: 100%;
+        }
+      }
+
+      .toggle-password {
+        position: absolute;
+        right: 12px;
+        font-size: 0.8rem;
+        color: crimson;
+        cursor: pointer;
+        user-select: none;
       }
     }
 

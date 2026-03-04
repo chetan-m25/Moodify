@@ -33,3 +33,24 @@ input:-webkit-autofill:active {
   caret-color: #fff;
   transition: background-color 9999s ease-in-out 0s;
 }
+
+.app-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-spinner {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid white;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -7,17 +7,35 @@ export const useAuth = () => {
   const { user, loading, setUser, setLoading } = context;
 
   async function handleRegister({ username, email, password }) {
-    setLoading(true);
-    const data = await register({ username, email, password });
-    setUser(data.user);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const data = await register({ username, email, password });
+      setUser(data.user);
+      return { success: true };
+    } catch (err) {
+      return {
+        success: false,
+        message: err?.response?.data?.message || "Registration failed",
+      };
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function handleLogin({ username, password }) {
-    setLoading(true);
-    const data = await login({ username, password });
-    setUser(data.user);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const data = await login({ username, password });
+      setUser(data.user);
+      return { success: true };
+    } catch (err) {
+      return {
+        success: false,
+        message: err?.response?.data?.message || "Invalid username or password",
+      };
+    } finally {
+      setLoading(false);
+    }
   }
 
   async function handleGetMe() {

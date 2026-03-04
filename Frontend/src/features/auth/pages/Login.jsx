@@ -4,17 +4,30 @@ import FormGroup from "../components/FormGroup";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
 
 const Login = () => {
-  const { handleLogin } = useAuth();
+  const { handleLogin, loading } = useAuth();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await handleLogin({ username, password });
+    setError("");
+
+    if (!username || !password) {
+      return setError("Username and password are required");
+    }
+
+    const result = await handleLogin({ username, password });
+
+    if (!result.success) {
+      return setError("Invalid username or password");
+    }
+
     navigate("/");
   }
 
@@ -31,18 +44,23 @@ const Login = () => {
             label="username"
             placeholder="Enter your username"
           />
+
           <FormGroup
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             label="password"
             placeholder="Enter your password"
           />
-          <button className="button" type="submit">
-            Login
+
+          {error && <p className="form-error">{error}</p>}
+
+          <button className="button" type="submit" disabled={loading}>
+            {loading ? <Loader /> : "Login"}
           </button>
         </form>
+
         <p>
-          Don't have an account? <Link to="/register">Register here</Link>{" "}
+          Don't have an account? <Link to="/register">Register here</Link>
         </p>
       </div>
     </main>

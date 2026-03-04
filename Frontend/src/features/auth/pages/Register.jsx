@@ -6,16 +6,42 @@ import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router";
 
 const Register = () => {
-  const { handleRegister } = useAuth();
+  const { handleRegister, loading } = useAuth();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await handleRegister({ username, password, email });
+    setError("");
+
+    if (!username || !email || !password) {
+      return setError("All fields are required");
+    }
+
+    if (!emailRegex.test(email)) {
+      return setError("Please enter a valid email");
+    }
+
+    if (password.length < 4) {
+      return setError("Password must be at least 4 characters");
+    }
+
+    if (password.length > 8) {
+      return setError("Password cannot exceed 8 characters");
+    }
+
+    const result = await handleRegister({ username, email, password });
+
+    if (!result.success) {
+      return setError(result.message);
+    }
+
     navigate("/");
   }
 
@@ -28,26 +54,32 @@ const Register = () => {
         <form onSubmit={handleSubmit}>
           <FormGroup
             value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value.slice(0, 15))}
             label="username"
             placeholder="Enter username"
           />
+
           <FormGroup
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             label="email"
             placeholder="Enter email"
           />
+
           <FormGroup
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             label="password"
             placeholder="Enter password"
           />
-          <button className="button" type="submit">
-            Register
+
+          {error && <p className="form-error">{error}</p>}
+
+          <button className="button" type="submit" disabled={loading}>
+            {loading ? "Loading..." : "Register"}
           </button>
         </form>
+
         <p>
           Already have an account? <Link to="/login">Login here</Link>
         </p>
