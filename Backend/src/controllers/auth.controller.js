@@ -3,6 +3,15 @@ import jwt from "jsonwebtoken";
 import userModel from "../models/user.model.js";
 import redis from "../config/cache.js";
 
+function getTokenCookieOptions() {
+  return {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 4 * 24 * 60 * 60 * 1000,
+  };
+}
+
 async function registerUser(req, res) {
   const { username, email, password } = req.body;
 
@@ -35,7 +44,7 @@ async function registerUser(req, res) {
     },
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, getTokenCookieOptions());
 
   res.status(201).json({
     message: "User Registered Successfully",
@@ -81,7 +90,7 @@ async function loginUser(req, res) {
     },
   );
 
-  res.cookie("token", token);
+  res.cookie("token", token, getTokenCookieOptions());
 
   res.status(200).json({
     message: "User Logged in Successfully",
