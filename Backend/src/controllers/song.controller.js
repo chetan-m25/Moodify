@@ -61,14 +61,26 @@ async function uploadSong(req, res) {
 }
 
 async function getSong(req, res) {
-  const { mood } = req.query;
+  try {
+    const { mood } = req.query;
 
-  const song = await songModel.findOne({ mood });
+    if (!mood) {
+      return res.status(400).json({
+        message: "Mood is required",
+      });
+    }
 
-  res.status(200).json({
-    message: "Song fetched Successfully",
-    song,
-  });
+    const songs = await songModel.find({ mood });
+
+    res.status(200).json({
+      message: "Songs fetched successfully",
+      songs,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
 }
 
 export { uploadSong, getSong };
