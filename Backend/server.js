@@ -6,6 +6,10 @@ const PORT = process.env.PORT || 8000;
 
 connectDB();
 
+app.get("/", (req, res) => {
+  res.send("Moodify API running...");
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT} 🚀`);
 });
