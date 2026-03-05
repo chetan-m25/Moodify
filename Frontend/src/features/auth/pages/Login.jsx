@@ -4,7 +4,6 @@ import FormGroup from "../components/FormGroup";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/Loader";
 
 const Login = () => {
   const { handleLogin, loading } = useAuth();
@@ -55,7 +54,7 @@ const Login = () => {
           {error && <p className="form-error">{error}</p>}
 
           <button className="button" type="submit" disabled={loading}>
-            {loading ? <Loader /> : "Login"}
+            {loading ? <span className="btn-loader"></span> : "Login"}
           </button>
         </form>
 

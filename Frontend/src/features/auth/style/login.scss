@@ -3,15 +3,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 
   background: #000;
   font-family: "Poppins", sans-serif;
 
   .form-container {
-    width: 380px;
+    width: 100%;
+    max-width: 380px;
+
     padding: 3rem 2.5rem;
     border-radius: 2rem;
-
     background: #111;
     box-shadow:
       0 0 60px rgba(220, 20, 60, 0.4),
@@ -28,6 +30,12 @@
       text-align: center;
       letter-spacing: 1px;
     }
+
+    .subtitle {
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+    }
   }
 
   form {
@@ -40,32 +48,27 @@
       flex-direction: column;
       gap: 0.4rem;
 
-      .form-error {
-        color: #ff4d6d;
-        font-size: 0.8rem;
-        text-align: center;
-      }
-
       label {
         font-size: 0.85rem;
         color: #bbb;
       }
 
       input {
+        width: 100%;
         padding: 0.9rem 1rem;
         border-radius: 0.75rem;
+
         background: #1a1a1a;
         border: 1px solid #222;
         color: #fff;
         font-size: 0.9rem;
-        transition: all 0.3s ease;
 
+        transition: all 0.3s ease;
         outline: none;
 
         &:focus {
           border: 1px solid crimson;
           box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
-          outline: none;
         }
       }
 
@@ -73,10 +76,6 @@
         position: relative;
         display: flex;
         align-items: center;
-
-        input {
-          width: 100%;
-        }
       }
 
       .toggle-password {
@@ -89,11 +88,18 @@
       }
     }
 
+    .form-error {
+      color: #ff4d6d;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
     .button {
       margin-top: 0.5rem;
       padding: 0.9rem;
       border-radius: 0.75rem;
       border: none;
+
       background: linear-gradient(135deg, crimson, #b11226);
       color: white;
       font-weight: 600;
@@ -103,6 +109,22 @@
       &:hover {
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(220, 20, 60, 0.4);
+      }
+    }
+
+    .btn-loader {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top: 3px solid white;
+      animation: spin 0.6s linear infinite;
+      display: inline-block;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
       }
     }
   }
@@ -120,6 +142,28 @@
       &:hover {
         text-decoration: underline;
       }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    .form-container {
+      padding: 2rem 1.6rem;
+      border-radius: 1.6rem;
+      gap: 1.2rem;
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .subtitle {
+        font-size: 0.85rem;
+      }
+    }
+
+    form {
+      gap: 1rem;
     }
   }
 }
